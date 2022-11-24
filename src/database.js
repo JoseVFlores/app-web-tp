@@ -2,6 +2,8 @@ const mysql = require('mysql');
 const { promisify } = require('util');
 const Connection = require('mysql/lib/Connection');
 
+//import{DB_USER, DB_PASSWORD, DB_HOST, DB_DATABASE, DB_PORT} from './configdb';
+
 const {database} = require('./keys');
 
 const pool = mysql.createPool(database);
