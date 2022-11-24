@@ -1,0 +1,170 @@
+<style>
+    .controls {
+        background-color: #fff;
+        border-radius: 2px;
+        border: 1px solid transparent;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        box-sizing: border-box;
+        font-family: Roboto;
+        font-size: 15px;
+        font-weight: 300;
+        height: 29px;
+        margin-left: 17px;
+        margin-top: 10px;
+        outline: none;
+        padding: 0 11px 0 13px;
+        text-overflow: ellipsis;
+        width: 400px;
+    }
+
+    .controls:focus {
+        border-color: #4d90fe;
+    }
+</style>
+
+<div class="container p-4">
+    <div class="row">
+        <div class="col-md-4">
+
+            <div class="card">
+                <div class="card-body">
+                    <form action="/links/add" method="POST">
+                        <div class="form-group">
+                            <label for="FormControlInput0">Tipo de actividad célula</label>
+                            <select class="form-control" name="tipo_act" required>
+                                <option selected></option>
+                                <option value="Presencia">Presencia</option>
+                                <option value="Expansión">Expansión</option>
+                                <option value="Relanzamiento">Relanzamiento</option>
+                                <option value="Mantenimiento">Mantenimiento</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="FormControlInput05">Actividad célula</label>
+                            <select class="form-control" name="actividad"required>
+                                <option selected></option>
+                                <option value="Activaciones internas">Activaciones internas</option>
+                                <option value="Activación punto de presencia">Activación punto de presencia</option>
+                                <option value="Activación BTL">Activación BTL</option>
+                                <option value="Volanteo masivo">Volanteo masivo</option>
+                                <option value="Cruceros">Cruceros</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="FormControlInput1">Número de promotores</label>
+                            <input type="number" min=1 class="form-control" id="FormControlInput1"
+                                placeholder="Ingrese número" name="num_promotores" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="FormControlInput2">Fecha de actividad</label>
+                            <input type="date" class="form-control" id="FormControlInput2" name="fecha_act" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="FormControlInput3">Horario entrada</label>
+                            <input type="time" class="form-control" id="FormControlInput3" name="Hentrada" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="FormControlInput4">Horario salida</label>
+                            <input type="time" class="form-control" id="FormControlInput4" name="Hsalida" required>
+                        </div>
+                        <fieldset>
+                            <div class="form-group">
+                                <label for="disabledTextInput">Coordenadas</label>
+                                <input type="text" id="disabledCoord" class="form-control" name="coord" required data-readonly>
+                            </div>
+                        </fieldset>
+                        <label for="FormControlInput6">Liga maps</label>
+                        <div class="form-group">
+                            <input type="url" name="url" class="form-control" placeholder="URL">
+                        </div>
+                        <label for="FormControlInput7">Comentarios</label>
+                        <div class="form-group">
+                            <textarea name="descripcion" rows="2" id="texto"class="form-control"
+                                placeholder="Comentarios"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-success btn-block">
+                                Enviar plan
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-8">
+            <div style="display: none">
+                <input id="pac-input" class="controls" type="text" placeholder="Buscar en mapa" />
+            </div>
+
+            <div class="card">
+                <div id="map" style="width:100%; height:710px"></div>
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+<script>
+    function initMap() {
+        // The location of Uluru
+        const uluru = { lat: 19.359778919440505, lng: -99.16804980335407 };
+        // The map, centered at Uluru
+        const map = new google.maps.Map(document.getElementById("map"), {
+            zoom: 15,
+            center: uluru,
+        });
+        // The marker, positioned at Uluru
+        const marker = new google.maps.Marker({
+            position: uluru,
+            map: map,
+            draggable:true
+         });
+
+          const input = document.getElementById("pac-input");
+
+        //["place_id", "geometry", "name", "formatted_address"]
+        // Specify just the place data fields that you need.
+         const autocomplete = new google.maps.places.Autocomplete(input, {
+         fields: ["place_id", "geometry", "name", "formatted_address"],
+        });
+
+        autocomplete.bindTo("bounds", map);
+
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+        autocomplete.addListener("place_changed", function(){
+            //infowindow.close();
+         const place = autocomplete.getPlace();
+         map.setCenter(place.geometry.location);
+         marker.setPosition(place.geometry.location);
+         //document.getElementById("disabledLatitud").value=place.geometry.location;
+         document.getElementById("disabledCoord").value=place.geometry.location;
+         //console.log(coord)
+        });
+
+        marker.addListener('dragend',function(event){
+         document.getElementById("disabledCoord").value=this.getPosition();
+         //document.getElementById("disabledCoord").value=this.getPosition.lat();
+        
+        });
+
+    }
+  
+  //document.getElementById("disabledCoord").value=place.geometry.location.lat();
+  //document.getElementById("disabledCoord").value=this.getPosition.lng();
+
+
+
+  window.initMap = initMap;
+
+</script>
+
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDuZN_VlffaRbgHGPP6vcy-jPGiK25H494&libraries=places&callback=initMap">
+    </script>
