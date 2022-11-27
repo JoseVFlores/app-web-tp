@@ -20,6 +20,7 @@ require('./lib/passport'); //(passport)
 //Settings
 app.set('port',process.env.PORT || 4000);
 app.set('views',path.join(__dirname,'views'));
+
 app.engine('.hbs',exphbs.engine({
     defaultLayout: 'main',
     layoutsDir:path.join(app.get('views'),'Layouts'),
@@ -63,7 +64,7 @@ app.use('/links',require('./routes/links.js')); //app.use(require('./links','./r
 
 //Archivos Publicos
 app.use(express.static(path.join(__dirname,'public')));
-
+app.use(express.static(path.join(__dirname, 'css')));
 //Startig Server
 app.listen(app.get('port'), ()=> {
 
