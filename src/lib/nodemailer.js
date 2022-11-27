@@ -78,7 +78,7 @@ const getTemplate = (fullname, token) => {
           <h2>Hola ${ fullname }</h2>
           <p>Para confirmar tu cuenta, ingresa al siguiente enlace</p>
           <a
-              href="http://localhost:4000/confirm/${ token }"
+              href="http://crud-api-tp-app-production.up.railway.app/confirm/${ token }"
               target="_blank"
           >Confirmar Cuenta</a>
       </div>
