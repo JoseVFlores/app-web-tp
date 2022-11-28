@@ -2,7 +2,7 @@ body {
     background: #f5f6fa;
 font-family: 'Oswald', sans-serif;
 
-    overflow: hidden;
+    overflow: scroll;
 }
 
 .index {
@@ -20,7 +20,7 @@ font-family: 'Oswald', sans-serif;
 
 .masthead {
     color: white;
-    min-height: 30rem;
+    min-height: 500px;
     width: auto;
     height: 100%;
     padding-top: 8rem;
@@ -31,20 +31,13 @@ font-family: 'Oswald', sans-serif;
     background-size: cover;
 }
 
-.masthead h1 {
-    font-size: 4rem;
-    margin: 0;
-    padding: 0;
-  }
-  
-
-
-  @media screen and (max-width: 480px) {
+@media screen and (max-width: 480px) {
     .masthead {
-      height: auto;
+      
+      height: 100%;
       width: auto;
+    
+      
     }
-    .masthead h1 {
-      font-size: 5.5rem;
-    }
-  }
+  
+}
