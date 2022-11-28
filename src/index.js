@@ -64,7 +64,7 @@ app.use('/links',require('./routes/links.js')); //app.use(require('./links','./r
 
 //Archivos Publicos
 app.use(express.static(path.join(__dirname,'public')));
-app.use(express.static(path.join(__dirname, 'css')));
+
 //Startig Server
 app.listen(app.get('port'), ()=> {
 

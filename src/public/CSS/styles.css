@@ -21,7 +21,7 @@ font-family: 'Oswald', sans-serif;
 .masthead {
     color: white;
     min-height: 30rem;
-    width: 100%;
+    width: auto;
     height: 100%;
     padding-top: 8rem;
     padding-bottom: 8rem;
@@ -37,9 +37,12 @@ font-family: 'Oswald', sans-serif;
     padding: 0;
   }
   
-  @media (min-width: 992px) {
+
+
+  @media screen and (max-width: 480px) {
     .masthead {
-      height: 100vh;
+      height: auto;
+      width: auto;
     }
     .masthead h1 {
       font-size: 5.5rem;
