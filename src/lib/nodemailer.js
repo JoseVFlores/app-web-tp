@@ -21,10 +21,10 @@ const router = require('../routes/Autenticacion')
 const { content } = require('googleapis/build/src/apis/content')
 const res = require('express/lib/response')
 
-const CLIENT_ID="380869421426-n24tri30e33reshcadp9rrd1o6cp50kc.apps.googleusercontent.com"
-const CLIENT_SECRET="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"
+const CLIENT_ID="380869421426-kfpt2i7nurmkj6la73mvjpr3qj25sutg.apps.googleusercontent.com"
+const CLIENT_SECRET="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"
 const REDIRECT_URI="https://developers.google.com/oauthplayground"
-const REFRESH_TOKEN="1//04x7xmMt9gxQTCgYIARAAGAQSNwF-L9Ir1srpcXGaMBAHSNFwizSaWdup1LubY0Xwd8qsga4yvBgRZxCLFfVU1DVh1qqRe-j9zOg"
+const REFRESH_TOKEN="1//049B_XhKKpn9YCgYIARAAGAQSNwF-L9IruCQAWczKz2Ffdvr3qjjf6KUJr-0r-5f1h4VVCfubomh9ZiXFyNgf7SBf2RWbGqH0Xs4"
 
 const oAuth2client = new google.auth.OAuth2(
     CLIENT_ID,

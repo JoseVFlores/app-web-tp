@@ -6,8 +6,8 @@ font-family: 'Oswald', sans-serif;
 }
 
 .index {
-    width: 100vw;
-    height: 100vh;
+    width: auto;
+    height: auto;
 }
 
 .navbar {
@@ -17,6 +17,7 @@ font-family: 'Oswald', sans-serif;
 .nav-link {
     color: #fff !important;
 }
+
 
 .masthead {
     color: white;
@@ -41,3 +42,4 @@ font-family: 'Oswald', sans-serif;
     }
   
 }
+

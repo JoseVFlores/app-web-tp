@@ -140,6 +140,10 @@ router.get('/registrado',isNotLoggedIn,(req,res)=>{
   res.render('auth/registrado');
 }) 
 
+router.get('/entradas',isNotLoggedIn,(req,res)=>{
+  res.render('auth/entradas');
+}) 
+
 router.get('/denue',isLoggedIn,(req,res)=>{
   res.render('auth/denue');
 }) 

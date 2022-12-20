@@ -52,7 +52,7 @@
                         </div>
                         <div class="form-group">
                             <label for="FormControlInput1">Número de promotores</label>
-                            <input type="number" min=1 class="form-control" id="FormControlInput1"
+                            <input type="number" min=1 max=100 class="form-control" id="FormControlInput1"
                                 placeholder="Ingrese número" name="num_promotores" required>
                         </div>
                         <div class="form-group">
@@ -70,12 +70,33 @@
                         <fieldset>
                             <div class="form-group">
                                 <label for="disabledTextInput">Coordenadas</label>
-                                <input type="text" id="disabledCoord" class="form-control" name="coord" required data-readonly>
+                                <input type="text" autocomplete="off" id="disabledCoord" class="form-control" name="coord" required>
                             </div>
                         </fieldset>
-                        <label for="FormControlInput6">Liga maps</label>
+                        <label for="FormControlInput6">Distrito</label>
                         <div class="form-group">
-                            <input type="url" name="url" class="form-control" placeholder="URL">
+                              <select class="form-control" name="url"required>
+                                <option selected></option>
+                                <option value="AEROPUERTO">Aeropuerto</option>
+                                <option value="ARAGÓN">Aragón</option>
+                                <option value="CHALCO IXTAPALUCA">Chalco Ixtapaluca</option>
+                                <option value="CHALCO VALLE">Chalco Valle</option>
+                                <option value="COACALCO">Coacalco</option>
+                                <option value="CONSTITUCIÓN">Constitución</option>
+                                <option value="ECATEPEC">Ecatepec</option>
+                                <option value="HUEHUETOCA">Huehuetoca</option>
+                                <option value="IZTAPALAPA">Iztapalapa</option>
+                                <option value="LOS REYES">Los Reyes</option>
+                                <option value="NEZA 1">Neza 1</option>
+                                <option value="NEZA 2">Neza 2</option>
+                                <option value="ODA">Ojo de Agua</option>
+                                <option value="TECAMAC">Tecamac</option>
+                                <option value="TEXCOCO">Texcoco</option>
+                                <option value="TOLUCA LERMA">Toluca Lerma</option>
+                                <option value="TOLUCA METEPEC">Toluca Metepec</option>
+                                <option value="TOLUCA SAN CARLOS">Toluca San Carlos</option>
+                                <option value="TULTEPEC">Tultepec</option>
+                            </select>
                         </div>
                         <label for="FormControlInput7">Comentarios</label>
                         <div class="form-group">

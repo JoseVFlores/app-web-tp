@@ -1,0 +1,131 @@
+<form action="/entradas" method="POST">
+    <div class="container p-2">
+        <div class="row">
+            <div class="col-md-4 mx-auto p-2">
+                <div class="form-group">
+                    <label for="FormControlInput0">Almacén</label>
+                    <select class="form-control" name="tipo_act" required>
+                        <option selected></option>
+                        <option value="Pantitlán">Pantitlán</option>
+                        <option value="Tecámac">Tecámac</option>
+                        <option value="Caballero">Caballero</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="FormControlInput0">Tipo Uniforme</label>
+                    <select class="form-control" name="tipo_act" required>
+                        <option selected></option>
+                        <option value="BTL">BTL</option>
+                        <option value="Cambaceo">Cambaceo</option>
+                        <option value="Relanzamiento">Relanzamiento</option>
+                        <option value="Mantenimiento">Mantenimiento</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="FormControlInput0">Genero</label>
+                    <select class="form-control" name="tipo_act" required>
+                        <option selected></option>
+                        <option value="Dama">Dama</option>
+                        <option value="Caballero">Caballero</option>
+                        <option value="Caballero">No Aplica</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="FormControlInput0">Distrito</label>
+                    <select class="form-control" name="tipo_act" required>
+                        <option selected></option>
+                        <option value="AEROPUERTO">AEROPUERTO</option>
+                        <option value="ARAGÓN">ARAGÓN</option>
+                        <option value="ARAGÓN">ARAGÓN</option>
+                        <option value="CHALCO IXTAPALUCA">CHALCO IXTAPALUCA</option>
+                        <option value="CONSTITUCIÓN">CONSTITUCIÓN</option>
+                        <option value="ECATEPEC">ECATEPEC</option>
+                        <option value="IZTAPALAPA">IZTAPALAPA</option>
+                        <option value="NEZA 1">NEZA 1</option>
+                        <option value="NEZA 2">NEZA 2</option>
+                        <option value="TOLUCA METEPEC">TOLUCA METEPEC</option>
+                        <option value="TOLUCA LERMA">TOLUCA LERMA</option>
+                        <option value="TOLUCA SAN CARLOS">TOLUCA SAN CARLOS</option>
+                        <option value="VALLE DE CHALCO">VALLE DE CHALCO</option>
+                        <option value="HUEHUETOCA">HUEHUETOCA</option>
+                        <option value="ODA">ODA</option>
+                        <option value="TECÁMAC">TECÁMAC</option>
+                        <option value="TEXCOCO">TEXCOCO</option>
+                        <option value="TULTEPEC">TULTEPEC</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container p-2">
+        <div class="row">
+
+            <div class="col-md-4 mx-auto">
+                <div class="card card-body text-center">
+                    <p>Foto</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="container p-4">
+        <div class="row">
+            <div class="col">
+                <div class="form-group form-group text-center">
+                    <label for="FormUniformesInput1">CH</label>
+                    <input type="number" min=0 class="form-control" id="FormControlInput1" placeholder="cantidad"
+                        name="CH" required>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group form-group text-center">
+                    <label for="FormUniformesInput1">M</label>
+                    <input type="number" min=0 class="form-control" id="FormControlInput1" placeholder="cantidad"
+                        name="M" required>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group form-group text-center">
+                    <label for="FormUniformesInput1">G</label>
+                    <input type="number" min=0 class="form-control" id="FormControlInput1" placeholder="cantidad"
+                        name="G" required>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group form-group text-center">
+                    <label for="FormUniformesInput1">XG</label>
+                    <input type="number" min=0 class="form-control" id="FormControlInput1" placeholder="cantidad"
+                        name="XG" required>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group form-group text-center">
+                    <label for="FormUniformesInput1">2XG</label>
+                    <input type="number" min=0 class="form-control" id="FormControlInput1" placeholder="cantidad"
+                        name="2XG" required>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group form-group text-center">
+                    <label for="FormUniformesInput1">3XG</label>
+                    <input type="number" min=0 class="form-control" id="FormControlInput1" placeholder="cantidad"
+                        name="3XG" required>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="text-center">
+        <button class="btn btn-success btn-block">
+            Registrar
+        </button>
+    </div>
+</form>
+
+<script>
+
+console.log(document.getElementById("disabledCoord").value)
+
+</script>
