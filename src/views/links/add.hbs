@@ -30,6 +30,11 @@
                 <div class="card-body">
                     <form action="/links/add" method="POST">
                         <div class="form-group">
+                            <label for="FormControlInput01">Coach</label>
+                            <input type="text" class="form-control" id="FormControlInput01"
+                            placeholder="Nombre del Coach" name="coach" required>
+                        </div>
+                        <div class="form-group">
                             <label for="FormControlInput0">Tipo de actividad célula</label>
                             <select class="form-control" name="tipo_act" required>
                                 <option selected></option>
@@ -41,7 +46,7 @@
                         </div>
                         <div class="form-group">
                             <label for="FormControlInput05">Actividad célula</label>
-                            <select class="form-control" name="actividad"required>
+                            <select class="form-control" name="actividad" required>
                                 <option selected></option>
                                 <option value="Activaciones internas">Activaciones internas</option>
                                 <option value="Activación punto de presencia">Activación punto de presencia</option>
@@ -70,12 +75,13 @@
                         <fieldset>
                             <div class="form-group">
                                 <label for="disabledTextInput">Coordenadas</label>
-                                <input type="text" autocomplete="off" id="disabledCoord" class="form-control" name="coord" required>
+                                <input type="text" autocomplete="off" id="disabledCoord" class="form-control"
+                                    name="coord" required>
                             </div>
                         </fieldset>
                         <label for="FormControlInput6">Distrito</label>
                         <div class="form-group">
-                              <select class="form-control" name="url"required>
+                            <select class="form-control" name="url" required>
                                 <option selected></option>
                                 <option value="AEROPUERTO">Aeropuerto</option>
                                 <option value="ARAGÓN">Aragón</option>
@@ -100,7 +106,7 @@
                         </div>
                         <label for="FormControlInput7">Comentarios</label>
                         <div class="form-group">
-                            <textarea name="descripcion" rows="2" id="texto"class="form-control"
+                            <textarea name="descripcion" rows="2" id="texto" class="form-control"
                                 placeholder="Comentarios"></textarea>
                         </div>
                         <div class="form-group">
@@ -144,45 +150,45 @@
         const marker = new google.maps.Marker({
             position: uluru,
             map: map,
-            draggable:true
-         });
+            draggable: true
+        });
 
-          const input = document.getElementById("pac-input");
+        const input = document.getElementById("pac-input");
 
         //["place_id", "geometry", "name", "formatted_address"]
         // Specify just the place data fields that you need.
-         const autocomplete = new google.maps.places.Autocomplete(input, {
-         fields: ["place_id", "geometry", "name", "formatted_address"],
+        const autocomplete = new google.maps.places.Autocomplete(input, {
+            fields: ["place_id", "geometry", "name", "formatted_address"],
         });
 
         autocomplete.bindTo("bounds", map);
 
         map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
-        autocomplete.addListener("place_changed", function(){
+        autocomplete.addListener("place_changed", function () {
             //infowindow.close();
-         const place = autocomplete.getPlace();
-         map.setCenter(place.geometry.location);
-         marker.setPosition(place.geometry.location);
-         //document.getElementById("disabledLatitud").value=place.geometry.location;
-         document.getElementById("disabledCoord").value=place.geometry.location;
-         //console.log(coord)
+            const place = autocomplete.getPlace();
+            map.setCenter(place.geometry.location);
+            marker.setPosition(place.geometry.location);
+            //document.getElementById("disabledLatitud").value=place.geometry.location;
+            document.getElementById("disabledCoord").value = place.geometry.location;
+            //console.log(coord)
         });
 
-        marker.addListener('dragend',function(event){
-         document.getElementById("disabledCoord").value=this.getPosition();
-         //document.getElementById("disabledCoord").value=this.getPosition.lat();
-        
+        marker.addListener('dragend', function (event) {
+            document.getElementById("disabledCoord").value = this.getPosition();
+            //document.getElementById("disabledCoord").value=this.getPosition.lat();
+
         });
 
     }
-  
-  //document.getElementById("disabledCoord").value=place.geometry.location.lat();
-  //document.getElementById("disabledCoord").value=this.getPosition.lng();
+
+    //document.getElementById("disabledCoord").value=place.geometry.location.lat();
+    //document.getElementById("disabledCoord").value=this.getPosition.lng();
 
 
 
-  window.initMap = initMap;
+    window.initMap = initMap;
 
 </script>
 
