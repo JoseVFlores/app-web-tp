@@ -15,7 +15,7 @@ router.post('/add', isLoggedIn, async (req, res,done) => {
 
 
 
-    const { tipo_act, actividad, num_promotores, fecha_act, Hentrada, Hsalida, coord, url, descripcion, coach } = req.body;
+    const { tipo_act, actividad, num_promotores, fecha_act, Hentrada, Hsalida, coord, url, descripcion, coach, apoyo, especiales } = req.body;
 
     
         const newPlan = {
@@ -29,6 +29,8 @@ router.post('/add', isLoggedIn, async (req, res,done) => {
             url,
             descripcion,
             coach,
+            especiales,
+            apoyo,
             user_id: req.user.id
         };
 
