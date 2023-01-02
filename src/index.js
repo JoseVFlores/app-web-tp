@@ -6,12 +6,21 @@ const flash = require('connect-flash');
 const session = require('express-session');
 const MySQLStore = require('express-mysql-session')(session);
 const passport = require('passport');
+const moment = require('moment'); 
+const hbs = require('hbs');
+const Handlebars = require("handlebars");
+const MomentHandler = require("handlebars.moment");
+
+MomentHandler.registerHelpers(Handlebars);
 
 const { urlencoded } = require('express');
 const res = require('express/lib/response');
 
 const { database } = require('./keys');
 
+//var hbs = exphbs.create({ /* config */ });
+
+hbs.registerHelper('dateFormat', require('handlebars-dateformat'));
 
 //Inicializaciones 
 const app=express();
