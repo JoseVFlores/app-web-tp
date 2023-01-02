@@ -196,6 +196,25 @@
 
 </div>
 
+<script>
+var today = new Date();
+var dd = today.getDate();
+var mm = today.getMonth() + 1; //January is 0!
+var yyyy = today.getFullYear();
+
+if (dd < 10) {
+   dd = '0' + dd;
+}
+
+if (mm < 10) {
+   mm = '0' + mm;
+} 
+    
+today = dd + '/' + mm + '/' + yyyy;
+document.getElementById("FormControlInput2").setAttribute("min", today);    
+</script>
+
+
 <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 
 <script>
