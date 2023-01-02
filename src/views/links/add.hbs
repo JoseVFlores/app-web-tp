@@ -20,6 +20,28 @@
     .controls:focus {
         border-color: #4d90fe;
     }
+
+        .controls2 {
+        background-color: #fff;
+        border-radius: 2px;
+        border: 1px solid transparent;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        box-sizing: border-box;
+        font-family: Roboto;
+        font-size: 15px;
+        font-weight: 300;
+        height: 29px;
+        margin-left: 17px;
+        margin-top: 10px;
+        outline: none;
+        padding: 0 11px 0 13px;
+        text-overflow: ellipsis;
+        width: 400px;
+    }
+
+    .controls2:focus {
+        border-color: #4d90fe;
+    }
 </style>
 
 <div class="container p-4">
@@ -74,9 +96,14 @@
                         </div>
                         <fieldset>
                             <div class="form-group">
-                                <label for="disabledTextInput">Coordenadas</label>
+                                <label for="disabledTextInput">Coordenada Inicio</label>
                                 <input type="text" autocomplete="off" id="disabledCoord" class="form-control"
                                     name="coord" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="disabledTextInput">Coordenada final</label>
+                                <input type="text" autocomplete="off" id="disabledCoordf" class="form-control"
+                                    name="coord2">
                             </div>
                         </fieldset>
                         <label for="FormControlInput6">Distrito</label>
@@ -143,13 +170,26 @@
 
         <div class="col-md-8">
             <div style="display: none">
-                <input id="pac-input" class="controls" type="text" placeholder="Buscar en mapa" />
+                <input id="pac-input" class="controls" type="text" placeholder="Buscar Coordenada inicial" />
             </div>
 
-            <div class="card">
-                <div id="map" style="width:100%; height:710px"></div>
+            <div class="card text-center card-body">
+                <h4>Coordenada inicial</h4>
+                <div id="map" style="width:100%; height:375px"></div>
+            </div>
+
+             <div style="display: none">
+                <input id="pac-input2" class="controls2" type="text" placeholder="Buscar Coordenada final" />
+            </div>
+            <div class="pt-2">
+             <div class="card text-center card-body p-t-10">
+                <h4>Coordenada final</h4>
+                <div id="map2" style="width:100%; height:375px"></div>
+             </div>
             </div>
         </div>
+
+        
 
 
     </div>
@@ -162,29 +202,56 @@
     function initMap() {
         // The location of Uluru
         const uluru = { lat: 19.359778919440505, lng: -99.16804980335407 };
+        const centrum = { lat: 19.534697248999752, lng: -99.20620514879863 };
+        
+
+
         // The map, centered at Uluru
         const map = new google.maps.Map(document.getElementById("map"), {
             zoom: 15,
             center: uluru,
         });
-        // The marker, positioned at Uluru
+
+        const map2 = new google.maps.Map(document.getElementById("map2"), {
+            zoom: 15,
+            center: centrum,
+        });
+
+
+
+
+
+       // The marker, positioned at Uluru
         const marker = new google.maps.Marker({
             position: uluru,
             map: map,
             draggable: true
         });
 
-        const input = document.getElementById("pac-input");
+        const marker2 = new google.maps.Marker({
+            position: centrum,
+            map: map2,
+            draggable: true
+        });
 
+        const input = document.getElementById("pac-input");
+        const input2 = document.getElementById("pac-input2");
+        
         //["place_id", "geometry", "name", "formatted_address"]
         // Specify just the place data fields that you need.
         const autocomplete = new google.maps.places.Autocomplete(input, {
             fields: ["place_id", "geometry", "name", "formatted_address"],
         });
+        const autocomplete2 = new google.maps.places.Autocomplete(input2, {
+            fields: ["place_id", "geometry", "name", "formatted_address"],
+        });
 
         autocomplete.bindTo("bounds", map);
-
+        autocomplete2.bindTo("bounds", map2);
+    
         map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+        map2.controls[google.maps.ControlPosition.TOP_LEFT].push(input2);
 
         autocomplete.addListener("place_changed", function () {
             //infowindow.close();
@@ -196,13 +263,38 @@
             //console.log(coord)
         });
 
+        autocomplete2.addListener("place_changed", function () {
+            //infowindow.close();
+            const place2 = autocomplete2.getPlace();
+            map2.setCenter(place2.geometry.location);
+            marker2.setPosition(place2.geometry.location);
+            //document.getElementById("disabledLatitud").value=place.geometry.location;
+            document.getElementById("disabledCoordf").value = place2.geometry.location;
+            //console.log(coord)
+        });
+
+
         marker.addListener('dragend', function (event) {
             document.getElementById("disabledCoord").value = this.getPosition();
             //document.getElementById("disabledCoord").value=this.getPosition.lat();
 
         });
 
+        marker2.addListener('dragend', function (event) {
+            document.getElementById("disabledCoordf").value = this.getPosition();
+            //document.getElementById("disabledCoord").value=this.getPosition.lat();
+
+        });
+
+       
+
     }
+
+    
+
+       
+
+    
 
     //document.getElementById("disabledCoord").value=place.geometry.location.lat();
     //document.getElementById("disabledCoord").value=this.getPosition.lng();
@@ -210,6 +302,8 @@
 
 
     window.initMap = initMap;
+    
+    
 
 </script>
 

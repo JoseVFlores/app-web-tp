@@ -1,0 +1,26 @@
+<div class="col-md-4 mx-auto">
+
+    <div class="card">
+        <div class="card-body">
+            <form action="/links/edit/{{link.id}}" method="POST">
+                <div class="form-group">
+                    <input type="text" name="actividad" class="form-control" readonly  value="{{link.actividad}}">
+                </div>
+                <div class="form-group">
+                    <input type="text" name="coach" class="form-control" readonly value="{{link.coach}}">
+                </div>
+                <div class="form-group">
+                    <input type="text" name="fecha_act" class="form-control" readonly value="{{moment link.fecha_act "DD/MM/YYYY"}}">
+                </div>
+                <div class="form-group">
+                    <textarea name="incidencia" rows="2" class="form-control" placeholder="Incidencia">{{link.incidencia}}</textarea>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-success btn-block">
+                        Agregar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

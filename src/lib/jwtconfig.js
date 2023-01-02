@@ -19,7 +19,7 @@ const getTokenData = (token) => {
     return data;
 }
 
-module.exports = {
-    getToken,
-    getTokenData
-}
+// module.exports = {
+//     getToken,
+//     getTokenData
+// }
