@@ -47,15 +47,17 @@ router.post('/signup', async(req,res,done)=>{
       const code = uuidv4();
 
       // Generar token
-      const token = getToken({ username, code });
+      //const token = getToken({ username, code });
+
+      const token ="SIN TOKEN"
 
       // Obtener un template
-      const template = getTemplate(fullname, token);
+      //const template = getTemplate(fullname, token);
 
       // Enviar el email
-      await sendEmail(username, template);
+      //await sendEmail(username, template);
 
-      const newUser = {username, password, fullname,empleado,token,code };
+      const newUser = {username, password, fullname,empleado,code,token};
       
       newUser.password = await helpers.encryptPassword(password);
       // Saving in the Database
