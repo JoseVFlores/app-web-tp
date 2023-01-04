@@ -1,71 +1,93 @@
 {{!-- <div class="container p-4">
-    <div class="row">
-        {{#each links}}
-        <div class="col-md-3">
-            <div class="card text-center">
-                <div class="card-body">
-                    <a href="{{url}}" target="_blank">
-                        <h3 class="card-title text-uppercase">
-                            {{tittle}}
-                        </h3>
-                    </a>
-                    <p class="m-2"></p>
-                    <p class="text-muted">
-                        {{timeago created_at}}
-                    </p>
-                    </a>
-                </div>
-            </div>
+  <div class="row">
+    {{#each links}}
+    <div class="col-md-3">
+      <div class="card text-center">
+        <div class="card-body">
+          <a href="{{url}}" target="_blank">
+            <h3 class="card-title text-uppercase">
+              {{tittle}}
+            </h3>
+          </a>
+          <p class="m-2"></p>
+          <p class="text-muted">
+            {{timeago created_at}}
+          </p>
+          </a>
         </div>
-        {{else}}
-        <div class="col-md-4 mx-auto">
-            <div class="card card-body text-center">
-                <p>Aún no tienes registros.</p>
-                <a href="/links/add">Ingresa tu primer registro.</a>
-            </div>
-        </div>
-        {{/each}}
+      </div>
     </div>
+    {{else}}
+    <div class="col-md-4 mx-auto">
+      <div class="card card-body text-center">
+        <p>Aún no tienes registros.</p>
+        <a href="/links/add">Ingresa tu primer registro.</a>
+      </div>
+    </div>
+    {{/each}}
+  </div>
 </div> --}}
+<style>
+
+.table-responsive{
+  overscroll-behavior-x: contain;
+  height: 500px;
+}
+
+</style>
+
+
 <div class="text-center">
   <h1>Actividades Registradas</h1>
 </div>
+<div class="table-responsive">
+  <table data-toggle="table" class="table table-striped table-bordered table-hover" data-sort-name="id" data-sort-order="desc">
+    <thead>
+      <tr>
+        <th data-field="id" data-sortable="true" scope="col">Id</th>
+        <th scope="col">Tipo de Actividad</th>
+        <th scope="col">Actividad célula</th>
+        <th scope="col">Promotores</th>
+        <th scope="col">Coach</th>
+        <th format="DD/MM/YYYY" scope="col">Fecha</th>
+        <th scope="col">Entrada</th>
+        <th scope="col">Salida</th>
+        <th scope="col">Coord Inicial</th>
+        <th scope="col">Coord Final</th>
+        <th scope="col">Act Esp</th>
+        <th scope="col">Comentarios</th>
+        <th scope="col">Creado</th>
+        <th scope="col">Incidencias</th>
+        <th scope="col">Detalle</th>
 
-<table  data-toggle="table" class="table table-striped table-bordered" data-sort-name="id" data-sort-order="desc">
-  <thead>
-    <tr>
-      <th data-field="id" data-sortable="true" scope="col">Id</th>
-      <th scope="col">Actividad</th>
-      <th scope="col">Coach</th>
-      <th format="DD/MM/YYYY" scope="col">Fecha</th>
-      <th scope="col">Entrada</th>
-      <th scope="col">Salida</th>
-      <th scope="col">Creado</th>
-      <th scope="col">Incidencias</th>
-      <th scope="col">Detalle</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each links}}
+      <tr>
+        <th scope="row">{{id}}</th>
+        <td>{{tipo_act}}</td>
+        <td>{{actividad}}</td>
+        <td>{{num_promotores}}</td>
+        <td>{{coach}}</td>
+        <td>{{moment fecha_act "DD/MM/YYYY"}}</td>
+        <td>{{Hentrada}}</td>
+        <td>{{Hsalida}}</td>
+        <td>{{coord}}</td>
+        <td>{{coord2}}</td>
+        <td>{{especiales}}</td>
+        <td>{{descripcion}}</td>
+        <td>{{timeago created_at}}</td>
+        <td><a href="/links/edit/{{id}}">agregar</a></td>
+        <td>{{incidencia}}</td>
+      </tr>
+      {{else}}
+      <tr>
+        <td class="text-center" colspan="9">Aún no tienes registros.<br><a class="btn btn-secondary"
+            href="/links/add">Ingresa tu primer registro.</a></br< /td>
+      </tr>
+      {{/each}}
 
-    </tr>
-  </thead>
-  <tbody>
-    {{#each links}}
-    <tr>
-      <th scope="row">{{id}}</th>
-      <td>{{actividad}}</td>
-      <td>{{coach}}</td>
-      <td>{{moment fecha_act "DD/MM/YYYY"}}</td>
-      <td>{{Hentrada}}</td>
-      <td>{{Hsalida}}</td>
-      <td>{{timeago created_at}}</td>
-      <td><a href="/links/edit/{{id}}">agregar</a></td>
-      <td>{{incidencia}}</td>
-    </tr>
-    {{else}}
-    <tr><td class="text-center" colspan="9">Aún no tienes registros.<br><a class="btn btn-secondary" href="/links/add">Ingresa tu primer registro.</a></br</td></tr>
-    {{/each}}
-      
-  </tbody>
-</table>
-
-
-
-
+    </tbody>
+  </table>
+</div>

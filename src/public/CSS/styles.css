@@ -1,7 +1,6 @@
-body {
+.body {
     background: #f5f6fa;
-font-family: 'Oswald', sans-serif;
-
+    font-family: 'Oswald', sans-serif;
     overflow: scroll;
 }
 
@@ -19,6 +18,7 @@ font-family: 'Oswald', sans-serif;
 }
 
 
+
 .masthead {
     color: white;
     min-height: 500px;
@@ -34,24 +34,8 @@ font-family: 'Oswald', sans-serif;
 
 @media screen and (max-width: 480px) {
     .masthead {
-      
       height: 100%;
       width: auto;
-    
-      
     }
-  
 }
 
-table.dataTable thead .sorting:after,
-table.dataTable thead .sorting:before,
-table.dataTable thead .sorting_asc:after,
-table.dataTable thead .sorting_asc:before,
-table.dataTable thead .sorting_asc_disabled:after,
-table.dataTable thead .sorting_asc_disabled:before,
-table.dataTable thead .sorting_desc:after,
-table.dataTable thead .sorting_desc:before,
-table.dataTable thead .sorting_desc_disabled:after,
-table.dataTable thead .sorting_desc_disabled:before {
-  bottom: .5em;
-}
