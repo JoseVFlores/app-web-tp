@@ -21,7 +21,7 @@
         border-color: #4d90fe;
     }
 
-        .controls2 {
+    .controls2 {
         background-color: #fff;
         border-radius: 2px;
         border: 1px solid transparent;
@@ -54,7 +54,7 @@
                         <div class="form-group">
                             <label for="FormControlInput01">Coach</label>
                             <input type="text" class="form-control" id="FormControlInput01"
-                            placeholder="Nombre del Coach" name="coach" required>
+                                placeholder="Nombre del Coach" name="coach" required>
                         </div>
                         <div class="form-group">
                             <label for="FormControlInput0">Tipo de actividad célula</label>
@@ -131,7 +131,7 @@
                                 <option value="TULTEPEC">Tultepec</option>
                             </select>
                         </div>
-                         <div class="form-group">
+                        <div class="form-group">
                             <label for="FormControlInput8">Áreas de apoyo</label>
                             <select class="form-control" name="apoyo">
                                 <option selected></option>
@@ -178,18 +178,18 @@
                 <div id="map" style="width:100%; height:375px"></div>
             </div>
 
-             <div style="display: none">
+            <div style="display: none">
                 <input id="pac-input2" class="controls2" type="text" placeholder="Buscar Coordenada final" />
             </div>
             <div class="pt-2">
-             <div class="card text-center card-body p-t-10">
-                <h4>Coordenada final</h4>
-                <div id="map2" style="width:100%; height:375px"></div>
-             </div>
+                <div class="card text-center card-body p-t-10">
+                    <h4>Coordenada final</h4>
+                    <div id="map2" style="width:100%; height:375px"></div>
+                </div>
             </div>
         </div>
 
-        
+
 
 
     </div>
@@ -197,21 +197,21 @@
 </div>
 
 <script>
-var today = new Date();
-var dd = today.getDate();
-var mm = today.getMonth() + 1; //January is 0!
-var yyyy = today.getFullYear();
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1; //January is 0!
+    var yyyy = today.getFullYear();
 
-if (dd < 10) {
-   dd = '0' + dd;
-}
+    if (dd < 10) {
+        dd = '0' + dd;
+    }
 
-if (mm < 10) {
-   mm = '0' + mm;
-} 
-    
-today = dd + '/' + mm + '/' + yyyy;
-document.getElementById("FormControlInput2").setAttribute("min", today);    
+    if (mm < 10) {
+        mm = '0' + mm;
+    }
+
+    today = dd + '/' + mm + '/' + yyyy;
+    document.getElementById("FormControlInput2").setAttribute("min", today);    
 </script>
 
 
@@ -222,7 +222,7 @@ document.getElementById("FormControlInput2").setAttribute("min", today);
         // The location of Uluru
         const uluru = { lat: 19.359778919440505, lng: -99.16804980335407 };
         const centrum = { lat: 19.534697248999752, lng: -99.20620514879863 };
-        
+
 
 
         // The map, centered at Uluru
@@ -236,12 +236,8 @@ document.getElementById("FormControlInput2").setAttribute("min", today);
             center: centrum,
         });
 
-
-
-
-
-       // The marker, positioned at Uluru
-        const marker = new google.maps.Marker({
+        //The marker, positioned at Uluru
+        let marker = new google.maps.Marker({
             position: uluru,
             map: map,
             draggable: true
@@ -254,43 +250,128 @@ document.getElementById("FormControlInput2").setAttribute("min", today);
         });
 
         const input = document.getElementById("pac-input");
-        const input2 = document.getElementById("pac-input2");
         
+        const searchBox = new google.maps.places.SearchBox(input);
+
+        const input2 = document.getElementById("pac-input2");
+
+        const searchBox2 = new google.maps.places.SearchBox(input2);
+
+        
+
         //["place_id", "geometry", "name", "formatted_address"]
         // Specify just the place data fields that you need.
-        const autocomplete = new google.maps.places.Autocomplete(input, {
-            fields: ["place_id", "geometry", "name", "formatted_address"],
-        });
-        const autocomplete2 = new google.maps.places.Autocomplete(input2, {
-            fields: ["place_id", "geometry", "name", "formatted_address"],
-        });
+        //const autocomplete = new google.maps.places.Autocomplete(input, {
+            //setfields: ["formatted_address"],
+        //});
+        //const autocomplete2 = new google.maps.places.Autocomplete(input2, {
+            //setfields: ["formatted_address"],
+        //});
 
-        autocomplete.bindTo("bounds", map);
-        autocomplete2.bindTo("bounds", map2);
-    
+        
+        //autocomplete.bindTo("bounds", map);
+        //autocomplete2.bindTo("bounds", map2);
+
         map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
         map2.controls[google.maps.ControlPosition.TOP_LEFT].push(input2);
 
-        autocomplete.addListener("place_changed", function () {
-            //infowindow.close();
-            const place = autocomplete.getPlace();
-            map.setCenter(place.geometry.location);
-            marker.setPosition(place.geometry.location);
-            //document.getElementById("disabledLatitud").value=place.geometry.location;
-            document.getElementById("disabledCoord").value = place.geometry.location;
-            //console.log(coord)
+        map.addListener("bounds_changed", () => {
+            searchBox.setBounds(map.getBounds());
         });
 
-        autocomplete2.addListener("place_changed", function () {
-            //infowindow.close();
-            const place2 = autocomplete2.getPlace();
+         map2.addListener("bounds_changed", () => {
+            searchBox2.setBounds(map2.getBounds());
+        });
+
+        let markers = [];
+        let markers2 = [];
+
+        searchBox.addListener("places_changed", () => {
+            const places = searchBox.getPlaces();
+            const place = places[0]
+
+            console.log(place)
+
+            if (places.length == 0) {
+                return;
+            }
+
+            markers.forEach((marker) => {
+            marker.setMap(null);
+            });
+            markers = [];
+
+            const icon = {
+            url: place.icon,
+            size: new google.maps.Size(71, 71),
+            origin: new google.maps.Point(0, 0),
+            anchor: new google.maps.Point(17, 34),
+            scaledSize: new google.maps.Size(25, 25),
+            };
+
+            //const bounds = new google.maps.LatLngBounds();
+            
+            //map.fitBounds(bounds);
+  
+            map.setCenter(place.geometry.location);
+            marker.setPosition(place.geometry.location);
+            document.getElementById("disabledCoord").value = place.geometry.location;
+        });
+
+
+        searchBox2.addListener("places_changed", () => {
+            const places2 = searchBox2.getPlaces();
+            const place2 = places2[0];
+
+            //console.log(place)
+
+            if (places2.length == 0) {
+                return;
+            }
+
+            markers2.forEach((marker) => {
+            markers2.setMap(null);
+            });
+            markers = [];
+
+            const icon2 = {
+            url: place2.icon,
+            size: new google.maps.Size(71, 71),
+            origin: new google.maps.Point(0, 0),
+            anchor: new google.maps.Point(17, 34),
+            scaledSize: new google.maps.Size(25, 25),
+            };
+
+            //const bounds = new google.maps.LatLngBounds();
+            
+            //map.fitBounds(bounds);
+  
             map2.setCenter(place2.geometry.location);
             marker2.setPosition(place2.geometry.location);
-            //document.getElementById("disabledLatitud").value=place.geometry.location;
             document.getElementById("disabledCoordf").value = place2.geometry.location;
-            //console.log(coord)
         });
+            
+        
+
+        //autocomplete.addListener("place_changed", function () {
+
+        //const place = autocomplete.getPlace();
+        //map.setCenter(place.geometry.location);
+        //marker.setPosition(place.geometry.location);
+        //document.getElementById("disabledCoord").value = place.geometry.location;
+
+        //});
+
+        //autocomplete2.addListener("place_changed", function () {
+            //infowindow.close();
+            //const place2 = autocomplete2.getPlace();
+            //map2.setCenter(place2.geometry.location);
+            //marker2.setPosition(place2.geometry.location);
+            //document.getElementById("disabledLatitud").value=place.geometry.location;
+            //document.getElementById("disabledCoordf").value = place2.geometry.location;
+            //console.log(place2)
+        //});
 
 
         marker.addListener('dragend', function (event) {
@@ -305,15 +386,9 @@ document.getElementById("FormControlInput2").setAttribute("min", today);
 
         });
 
-       
+
 
     }
-
-    
-
-       
-
-    
 
     //document.getElementById("disabledCoord").value=place.geometry.location.lat();
     //document.getElementById("disabledCoord").value=this.getPosition.lng();
@@ -321,11 +396,11 @@ document.getElementById("FormControlInput2").setAttribute("min", today);
 
 
     window.initMap = initMap;
-    
-    
+    //window.initAutocomplete = initAutocomplete;
+
 
 </script>
 
-<script async defer
+<script async
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDuZN_VlffaRbgHGPP6vcy-jPGiK25H494&libraries=places&callback=initMap">
     </script>
