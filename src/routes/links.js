@@ -42,7 +42,7 @@ router.post('/add', isLoggedIn, async (req, res,done) => {
 
     
 });
-
+ 
 router.get('/', isLoggedIn, async (req, res) => {
 
     const links = await pool.query('SELECT * FROM Planes WHERE user_id=?', [req.user.id]);
