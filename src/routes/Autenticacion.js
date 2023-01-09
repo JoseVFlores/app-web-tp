@@ -114,11 +114,12 @@ router.post('/signup',
   failureRedirect: '/signup',
   failureFlash: true
   }));
-  */ 
+*/ 
 
- // SINGIN
- //router.get('/signin', isNotLoggedIn, (req, res) => {
-  router.get('/signin', isNotLoggedIn,(req, res) => {
+// SINGIN
+//router.get('/signin', isNotLoggedIn, (req, res) => {
+  
+router.get('/signin', isNotLoggedIn,(req, res) => {
     res.render('auth/signin');
   });
  
