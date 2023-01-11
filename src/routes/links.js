@@ -78,7 +78,7 @@ router.post('/edit/:id', isLoggedIn, async (req, res) => {
 
 router.get('/add2/:id', async (req, res) => {
     const { id } = req.params;
-    const planes = await pool.query('SELECT * FROM planes WHERE id = ?', [id]);
+    const planes = await pool.query('SELECT * FROM Planes WHERE id = ?', [id]);
     res.render('links/add2', {plan: planes[0]});
     console.log(planes[0])
 });
