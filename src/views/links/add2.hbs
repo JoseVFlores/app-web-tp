@@ -46,11 +46,11 @@
 
 <div class="container p-4">
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-4 mx-auto">
 
             <div class="card">
                 <div class="card-body">
-                    <form action="/links/add" method="POST">
+                    <form action="/links/add2/{{plan.id}}" method="POST">
                         {{!-- <div class="form-group">
                             <label for="FormControlInput01">Coach</label>
                             <input type="text" class="form-control" id="FormControlInput01"
@@ -59,7 +59,7 @@
                         <div class="form-group">
                             <label for="FormControlInput0">Tipo de actividad célula</label>
                             <select class="form-control" name="tipo_act" required>
-                                <option selected></option>
+                                <option selected >{{plan.tipo_act}}</option>
                                 <option value="Presencia">Presencia</option>
                                 <option value="Expansión">Expansión</option>
                                 <option value="Relanzamiento">Relanzamiento</option>
@@ -69,7 +69,7 @@
                         <div class="form-group">
                             <label for="FormControlInput05">Actividad célula</label>
                             <select class="form-control" name="actividad" required>
-                                <option selected></option>
+                                <option selected>{{plan.actividad}}</option>
                                 <option value="Activaciones internas">Activaciones internas</option>
                                 <option value="Activación punto de presencia">Activación punto de presencia</option>
                                 <option value="Activación BTL">Activación BTL</option>
@@ -80,36 +80,36 @@
                         <div class="form-group">
                             <label for="FormControlInput1">Número de promotores</label>
                             <input type="number" min=1 max=100 class="form-control" id="FormControlInput1"
-                                placeholder="Ingrese número" name="num_promotores" required>
+                                placeholder="Ingrese número" name="num_promotores" value="{{plan.num_promotores}}" required>
                         </div>
                         <div class="form-group">
                             <label for="FormControlInput2">Fecha de actividad</label>
-                            <input type="date" class="form-control" id="FormControlInput222" name="fecha_act" required>
+                            <input type="date" class="form-control" id="FormControlInput2" name="fecha_act" value="{{moment plan.fecha_act "YYYY-MM-DD"}}" required>
                         </div>
                         <div class="form-group">
                             <label for="FormControlInput3">Horario entrada</label>
-                            <input type="time" class="form-control" id="FormControlInput3" name="Hentrada" required>
+                            <input type="time" class="form-control" id="FormControlInput3" name="Hentrada" value="{{plan.Hentrada}}" required>
                         </div>
                         <div class="form-group">
                             <label for="FormControlInput4">Horario salida</label>
-                            <input type="time" class="form-control" id="FormControlInput4" name="Hsalida" required>
+                            <input type="time" class="form-control" id="FormControlInput4" name="Hsalida" value="{{plan.Hsalida}}" required>
                         </div>
                         <fieldset>
                             <div class="form-group">
                                 <label for="disabledTextInput">Coordenada Inicio de Actividad</label>
                                 <input type="text" autocomplete="off" id="disabledCoord" class="form-control"
-                                    name="coord" required readonly>
+                                    name="coord" value="{{plan.coord}}" required>
                             </div>
                             <div class="form-group">
                                 <label for="disabledTextInput">Coordenada Fin de Actividad</label>
                                 <input type="text" autocomplete="off" id="disabledCoordf" class="form-control"
-                                    name="coord2" readonly>
+                                    name="coord2" value="{{plan.coord2}}">
                             </div>
                         </fieldset>
                         <label for="FormControlInput6">Distrito</label>
                         <div class="form-group">
                             <select class="form-control" name="url" required>
-                                <option selected></option>
+                                <option selected>{{plan.url}}</option>
                                 <option value="AEROPUERTO">Aeropuerto</option>
                                 <option value="ARAGÓN">Aragón</option>
                                 <option value="CHALCO IXTAPALUCA">Chalco Ixtapaluca</option>
@@ -134,7 +134,7 @@
                         <div class="form-group">
                             <label for="FormControlInput8">Áreas de apoyo</label>
                             <select class="form-control" name="apoyo">
-                                <option selected></option>
+                                <option selected>{{plan.apoyo}}</option>
                                 <option value="Cambaceo">Cambaceo</option>
                                 <option value="Desarrollo Comercial">Desarrollo Comercial</option>
                                 <option value="Recursos Humanos">Recursos Humanos</option>
@@ -146,7 +146,7 @@
                         <div class="form-group">
                             <label for="FormControlInput9">Actividades Especiales</label>
                             <select class="form-control" name="especiales">
-                                <option selected></option>
+                                <option selected>{{plan.especiales}}</option>
                                 <option value="Caravana">Caravana</option>
                                 <option value="Eventos Especiales">Eventos Especiales</option>
                                 <option value="Oficina Móvil">Oficina Móvil</option>
@@ -157,7 +157,7 @@
                         <label for="FormControlInput7">Comentarios</label>
                         <div class="form-group">
                             <textarea name="descripcion" rows="2" id="texto" class="form-control"
-                                placeholder="Comentarios"></textarea>
+                                value="{{plan.descripcion}}" placeholder="Comentarios"></textarea>
                         </div>
                         <div class="form-group">
                             <button class="btn btn-success btn-block">
@@ -170,7 +170,7 @@
         </div>
 
 
-        <div class="col-md-8">
+        {{!-- <div class="col-md-8">
             <div style="display: none">
                 <input id="pac-input" class="controls" type="text" placeholder="Buscar Coordenada inicial" />
             </div>
@@ -189,7 +189,7 @@
                 <div id="map2" style="width:100%; height:375px"></div>
              </div>
             </div>
-        </div>
+        </div> --}}
 
 
 
@@ -199,9 +199,21 @@
 </div>
 
 <script>
-    let inputValue = document.getElementById("FormControlInput222").value;
-    let inputValue3 = document.getElementById("FormControlInput3");
-    console.log(inputValue3 );
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1; //January is 0!
+    var yyyy = today.getFullYear();
+
+    if (dd < 10) {
+        dd = '0' + dd;
+    }
+
+    if (mm < 10) {
+        mm = '0' + mm;
+    }
+
+    today = dd + '/' + mm + '/' + yyyy;
+    document.getElementById("FormControlInput2").setAttribute("min", today);    
 </script>
 
 
