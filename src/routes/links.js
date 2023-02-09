@@ -16,7 +16,7 @@ router.post('/add', isLoggedIn, async (req, res,done) => {
 
 
 
-    const { tipo_act, actividad, num_promotores, fecha_act, Hentrada, Hsalida, coord, url, descripcion, coach, apoyo, especiales, coord2 } = req.body;
+    const { tipo_act, actividad, num_promotores, fecha_act, Hentrada, Hsalida, coord, url, descripcion, coach, apoyo, especiales, coord2, fecha_act2 } = req.body;
 
     
         const newPlan = {
@@ -33,7 +33,9 @@ router.post('/add', isLoggedIn, async (req, res,done) => {
             especiales,
             apoyo,
             coord2,
+            fecha_act2,
             user_id: req.user.id
+
         };
 
     await pool.query('INSERT INTO Planes set ?', [newPlan]);
@@ -85,7 +87,7 @@ router.get('/add2/:id', async (req, res) => {
 
 router.post('/add2/:id', async (req, res) => {
     const { id } = req.params;
-    const { tipo_act, actividad, num_promotores, fecha_act, Hentrada, Hsalida, coord, url, descripcion, coach, apoyo, especiales, coord2 } = req.body; 
+    const { tipo_act, actividad, num_promotores, fecha_act, Hentrada, Hsalida, coord, url, descripcion, coach, apoyo, especiales, coord2, fecha_act2 } = req.body; 
     const newLink = {
         tipo_act,
         actividad,
@@ -99,7 +101,8 @@ router.post('/add2/:id', async (req, res) => {
         coach,
         especiales,
         apoyo,
-        coord2
+        coord2,
+        fecha_act
     };
     await pool.query('UPDATE Planes set ? WHERE id = ?', [newLink, id]);
     req.flash('success', 'Actividad actualizada exitosamente');

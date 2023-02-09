@@ -85,9 +85,14 @@
                                 placeholder="Ingrese número" name="num_promotores" value="{{plan.num_promotores}}" required>
                         </div>
                         <div class="form-group">
-                            <label for="FormControlInput2">Fecha de actividad</label>
+                            <label for="FormControlInput2">Fecha de actividad inicio</label>
                             <input type="date" class="form-control" id="FormControlInput2" name="fecha_act" value="{{moment plan.fecha_act "YYYY-MM-DD"}}" required>
                         </div>
+                        <div class="form-group">
+                            <label for="FormControlInput2">Fecha de actividad fin</label>
+                            <input type="date" class="form-control" id="FormControlInput22" name="fecha_act2" value="{{moment plan.fecha_act2 "YYYY-MM-DD"}}" required>
+                        </div>
+
                         <div class="form-group">
                             <label for="FormControlInput3">Horario entrada</label>
                             <input type="time" class="form-control" id="FormControlInput3" name="Hentrada" value="{{plan.Hentrada}}" required>
