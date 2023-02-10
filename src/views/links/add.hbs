@@ -257,7 +257,11 @@
         const input2 = document.getElementById("pac-input2");
 
         const searchBox2 = new google.maps.places.SearchBox(input2);
-
+        
+        const request = {
+           //placeId: "ChIJN1t_tDeuEmsRUsoyG83frY4",
+           fields: ["name", "formatted_address", "geometry"],
+        };
         
 
         //["place_id", "geometry", "name", "formatted_address"]
@@ -289,7 +293,7 @@
         let markers2 = [];
 
         searchBox.addListener("places_changed", () => {
-            const places = searchBox.getPlaces();
+            const places = searchBox.getPlaces(request);
             const place = places[0]
 
             //console.log(place)
@@ -322,7 +326,7 @@
 
 
         searchBox2.addListener("places_changed", () => {
-            const places2 = searchBox2.getPlaces();
+            const places2 = searchBox2.getPlaces(request);
             const place2 = places2[0];
 
             //console.log(place)
