@@ -262,6 +262,13 @@
            //placeId: "ChIJN1t_tDeuEmsRUsoyG83frY4",
            fields: ["name", "formatted_address", "geometry"],
         };
+
+        const options = {
+         componentRestrictions: { country: "mx" },
+         fields: ["formatted_address", "geometry", "name"],
+         strictBounds: false,
+         types: ["establishment"],
+        };
         
 
         //["place_id", "geometry", "name", "formatted_address"]
@@ -280,6 +287,9 @@
         map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
         map2.controls[google.maps.ControlPosition.TOP_LEFT].push(input2);
+
+        const autocomplete = new google.maps.places.Autocomplete(input, options);
+        const autocomplete2 = new google.maps.places.Autocomplete(input2, options);
 
         map.addListener("bounds_changed", () => {
             searchBox.setBounds(map.getBounds());
